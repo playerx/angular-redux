@@ -8,19 +8,19 @@ import { RootReducer } from './root.reducer';
 import { RootEpics } from './root.epics';
 
 // The top-level reducers and epics that make up our app's logic.
-import { IAppState } from './model';
+import { AppState, DefaultAppState } from './root.model';
 // import { RootEpics } from './epics';
 
 
 @NgModule({
-	imports: [NgReduxModule, NgReduxRouterModule],
-	providers: [RootEpics],
+	imports: [NgReduxModule],
+	providers: [RootEpics, RootReducer],
 })
 export class StoreModule {
 	constructor(
-		public store: NgRedux<IAppState>,
+		public store: NgRedux<AppState>,
 		devTools: DevToolsExtension,
-		ngReduxRouter: NgReduxRouter,
+		// ngReduxRouter: NgReduxRouter,
 		rootReducer: RootReducer,
 		rootEpics: RootEpics,
 	) {
@@ -29,14 +29,14 @@ export class StoreModule {
 		// it too.
 		store.configureStore(
 			rootReducer.compose(),
-			{},
-			[createLogger(), ...rootEpics.compose()],
+			DefaultAppState,
+			[...rootEpics.compose()],
 			devTools.isEnabled() ? [devTools.enhancer()] : []);
 
-		// Enable syncing of Angular router state with our Redux store.
-		if (ngReduxRouter) {
-			ngReduxRouter.initialize();
-		}
+		// // Enable syncing of Angular router state with our Redux store.
+		// if (ngReduxRouter) {
+		// 	ngReduxRouter.initialize();
+		// }
 
 		// Enable syncing of Angular form state with our Redux store.
 		provideReduxForms(store);

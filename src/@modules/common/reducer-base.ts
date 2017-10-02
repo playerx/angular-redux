@@ -3,34 +3,23 @@ import { Action } from 'redux';
 import { Type } from '@angular/core';
 
 
+type Reducer<TState> = (state: TState, action: Action) => TState;
+
 export abstract class ReducerBase<TState> {
 
-	private stream = new Subject<any>();
+	reducer: Reducer<TState>;
 
-	public reducer(state, action: Action) {
-		this.stream.next({
-			type: action.type,
-			state: state,
-			payload: action
-		});
+	constructor() {
+		const actionFunctions: { [actionType: string]: Reducer<TState> } = Object.getPrototypeOf(this);
+
+		this.reducer = this.compose(actionFunctions);
 	}
 
-	protected subscribe<TAction extends Action>(
-		type: string,
-		work: (state: TState, payload: TAction) => TState
-	) {
-		return this.stream
-			.filter(x => x.type === type)
-			.subscribe(x => work(x.state, x.payload));
-	}
+	abstract getInitialState();
 
-	protected subscribe2<TAction extends Action>(
-		action: Type<Action>,
-		work: (state: TState, payload: TAction) => TState
-	) {
-		return this.stream
-			.filter(x => x.type === new action().type)
-			.subscribe(x => work(x.state, x.payload));
+
+	private compose(obj: { [actionType: string]: Reducer<TState> }) {
+		return (state: TState, action: Action) => obj[action.type] ? obj[action.type](state, action) : (state || this.getInitialState());
 	}
 }
 

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Rx';
 export class UserService {
 
 	loadList() {
+
 		return Observable.of([
 			{ name: 'Item 1' },
 			{ name: 'Item 2' },

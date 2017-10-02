@@ -6,7 +6,7 @@ import { createEpics } from 'redux-observable-decorator';
 @Injectable()
 export class RootEpics {
 	constructor(
-		private userEpics: UserEpics
+		private userEpics: UserEpics,
 	) { }
 
 

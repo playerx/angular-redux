@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+import { dispatch } from '@angular-redux/store';
 import { Action } from 'redux';
 
 
@@ -6,7 +8,8 @@ export const Types = {
 	LoadListSuccess: '[User] Load List Success',
 	LoadListError: '[User] Load List Error',
 	LoadById: '[User] Load by id',
-	Add: '[User] Add'
+	Add: '[User] Add',
+	Ping: '[User] Ping',
 };
 
 
@@ -25,17 +28,53 @@ export class LoadListError implements Action {
 export class LoadById implements Action {
 	type = Types.LoadById;
 
-	constructor(
-		public id: number
-	) { }
+	public id: number;
 }
 
 export class Add implements Action {
 	type = Types.Add;
 
-	constructor(
-		firstName: string,
-		lastName: string,
-		age: number
-	) { }
+	firstName: string;
+	lastName: string;
+	age: number;
+}
+
+
+@Injectable()
+export class UserActions {
+
+	@dispatch()
+	LoadList = () => ({
+		type: Types.LoadList,
+		payload: null,
+	})
+
+	LoadListSuccess = (list) => ({
+		type: Types.LoadListSuccess,
+		payload: list,
+	})
+
+	LoadListError = (error) => ({
+		type: Types.LoadListError,
+		payload: null,
+		error: error
+	})
+
+	@dispatch()
+	LoadById = (x: LoadById) => ({
+		type: Types.LoadById,
+		payload: null,
+	})
+
+	@dispatch()
+	Add = (x: Add) => ({
+		type: Types.Add,
+		payload: x,
+	})
+
+	@dispatch()
+	Ping = () => ({
+		type: Types.Ping,
+		payload: null,
+	})
 }
