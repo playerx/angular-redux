@@ -3,7 +3,6 @@ import { ReducerBase } from '@modules/common';
 import { Action } from 'redux';
 import { Subject } from 'rxjs/Rx';
 
-// import * as customerActions from '@modules/customer/api';
 import * as userActions from './user.actions';
 import { State, DefaultState } from './model';
 
@@ -11,35 +10,46 @@ import { State, DefaultState } from './model';
 @Injectable()
 export class UserReducer extends ReducerBase<State> {
 
-	getInitialState() {
+
+	get initialState() {
 		return DefaultState;
 	}
 
-	[userActions.Types.LoadList](state, payload: userActions.LoadList) {
+
+	reducerMapping = {
+		[userActions.Types.LoadList]: this.LoadList,
+		[userActions.Types.LoadById]: this.LoadById,
+		[userActions.Types.LoadListSuccess]: this.LoadListSuccess,
+		[userActions.Types.Add]: this.Add,
+		['PONG']: this.Pong,
+	};
+
+
+	LoadList(state: State, payload: userActions.LoadList) {
 		console.log('LoadList reduced');
 
 		return state;
 	}
 
-	[userActions.Types.LoadById](state, payload: userActions.LoadById) {
+	LoadById(state, payload: userActions.LoadById) {
 		console.log('LoadById reduced');
 
 		return state;
 	}
 
-	[userActions.Types.LoadListSuccess](state, payload: userActions.LoadById) {
+	LoadListSuccess(state, payload: userActions.LoadListSuccess) {
 		console.log('LoadListSuccess reduced');
 
 		return state;
 	}
 
-	[userActions.Types.Add](state, payload: userActions.Add) {
+	Add(state, payload: userActions.Add) {
 		console.log('Add reduced');
 
 		return state;
 	}
 
-	['PONG'](state, payload) {
+	Pong(state, payload) {
 		console.log('Pong', state, payload);
 
 		return state;

@@ -9,17 +9,20 @@ export abstract class ReducerBase<TState> {
 
 	reducer: Reducer<TState>;
 
+	reducerMapping: { [actionType: string]: Reducer<TState> };
+
+
 	constructor() {
-		const actionFunctions: { [actionType: string]: Reducer<TState> } = Object.getPrototypeOf(this);
+		const actionFunctions: { [actionType: string]: Reducer<TState> } = this.reducerMapping || Object.getPrototypeOf(this);
 
 		this.reducer = this.compose(actionFunctions);
 	}
 
-	abstract getInitialState();
+	abstract get initialState();
 
 
 	private compose(obj: { [actionType: string]: Reducer<TState> }) {
-		return (state: TState, action: Action) => obj[action.type] ? obj[action.type](state, action) : (state || this.getInitialState());
+		return (state: TState, action: Action) => obj[action.type] ? obj[action.type](state, action) : (state || this.initialState);
 	}
 }
 
