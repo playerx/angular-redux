@@ -26,7 +26,6 @@ export class UserEpics {
 				.catch(err => of(this.userActions.LoadListError(err)))
 		)
 
-
 	@Epic()
 	Ping = (x) => x
 		.ofType(Actions.Types.Ping)
