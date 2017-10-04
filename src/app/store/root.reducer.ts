@@ -17,7 +17,7 @@ export class RootReducer {
 		return composeReducers(
 			defaultFormReducer(),
 			combineReducers({
-				user: compose<UserState>([this.userReducer.reducer, this.userReducer.reducer, this.userReducer.reducer, this.userReducer.reducer]),
+				user: simpleReducer,
 				router: routerReducer,
 			}));
 	}
@@ -37,3 +37,7 @@ export function compose<TState>(reducers: [any]): any {
 			reducer(newState, action), state);
 }
 
+
+export function simpleReducer(state, action) {
+	return action.reduce(state);
+}
