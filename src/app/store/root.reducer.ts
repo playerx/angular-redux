@@ -3,23 +3,22 @@ import { routerReducer } from '@angular-redux/router';
 import { combineReducers } from 'redux';
 import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 
-import { State as UserState, UserReducer } from '@modules/user/api';
+import { rootReducer } from '@modules/common';
+import { DefaultAppState } from './root.model';
 
 
 @Injectable()
 export class RootReducer {
 
-	constructor(
-		private userReducer: UserReducer
-	) { }
+	constructor() { }
 
 	compose() {
 		return composeReducers(
 			defaultFormReducer(),
-			combineReducers({
-				user: simpleReducer,
-				router: routerReducer,
-			}));
+			combineReducers(rootReducer(DefaultAppState).with({
+				router: routerReducer
+			}))
+		);
 	}
 }
 

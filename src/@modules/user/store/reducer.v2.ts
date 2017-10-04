@@ -3,7 +3,8 @@ import { ReducerBase } from '@modules/common';
 import { Action } from 'redux';
 import { Subject } from 'rxjs/Rx';
 
-import * as userActions from './user.actions';
+import { ActionTypes } from './action-types';
+import * as actions from './actions';
 import { State, DefaultState } from './model';
 
 
@@ -15,25 +16,25 @@ export class UserReducer extends ReducerBase<State> {
 	}
 
 
-	[userActions.Types.LoadList](state: State, payload: userActions.LoadList) {
+	[ActionTypes.LoadList](state: State, payload: actions.LoadList) {
 		console.log('LoadList reduced');
 
 		return state;
 	}
 
-	[userActions.Types.LoadById](state, payload: userActions.LoadById) {
+	[ActionTypes.LoadById](state, payload: actions.LoadById) {
 		console.log('LoadById reduced');
 
 		return state;
 	}
 
-	[userActions.Types.LoadListSuccess](state, payload: userActions.LoadListSuccess) {
+	[ActionTypes.LoadListSuccess](state, payload: actions.LoadListSuccess) {
 		console.log('LoadListSuccess reduced');
 
 		return state;
 	}
 
-	[userActions.Types.Add](state, payload: userActions.Add) {
+	[ActionTypes.Add](state, payload: actions.Add) {
 		console.log('Add reduced');
 
 		return state;

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Epic } from 'redux-observable-decorator';
 import { of } from 'rxjs/observable/of';
 
-import * as Actions from './user.actions';
-import { UserService } from './user.service';
-import { UserActions } from './user.actions';
+import { ActionTypes } from './action-types';
+import { Dispatcher } from './dispatcher';
+import * as actions from './actions';
+import { UserService } from '../services/user.service';
 
 
 @Injectable()
@@ -12,22 +13,22 @@ export class UserEpics {
 
 	constructor(
 		private userService: UserService,
-		private userActions: UserActions
+		private actionsDispatcher: Dispatcher
 	) { }
 
 
 	@Epic()
 	LoadList = stream => stream
-		.ofType(Actions.Types.LoadList)
+		.ofType(ActionTypes.LoadList)
 		.map(x => { console.log('asd'); return x; })
 		.switchMap(x =>
 			this.userService.loadList()
-				.map(items => this.userActions.LoadListSuccess(items))
-				.catch(err => of(this.userActions.LoadListError(err)))
+				.map(items => this.actionsDispatcher.LoadListSuccess(items))
+				.catch(err => of(this.actionsDispatcher.LoadListError(err)))
 		)
 
 	@Epic()
 	Ping = (x) => x
-		.ofType(Actions.Types.Ping)
+		.ofType(ActionTypes.Ping)
 		.mapTo({ type: 'PONG' })
 }

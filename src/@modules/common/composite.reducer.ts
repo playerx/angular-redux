@@ -1,9 +1,4 @@
-import { Subject } from 'rxjs/Rx';
-import { Action } from 'redux';
-import { Type } from '@angular/core';
-
-
-type Reducer<TState> = (state: TState, action: Action) => TState;
+import { Action, Reducer } from 'redux';
 
 export function compose<TState>(reducers: [Reducer<TState>]): Reducer<TState> {
 	return (state, action) =>
