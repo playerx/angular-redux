@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 
 
-const simpleReducerFactory = function (initialState) {
+const simpleReducerFactory = function (module, initialState) {
 	initialState = null;
 
 	return function simpleReducer<TState>(state: TState, action): Reducer<TState> {
@@ -10,7 +10,11 @@ const simpleReducerFactory = function (initialState) {
 			return initialState;
 		}
 
-		return action.reduce(state);
+		if (module !== action.module) {
+			return;
+		}
+
+		return action.reduce(state || initialState);
 	};
 };
 
@@ -31,7 +35,7 @@ export function rootReducer(rootState): RootReducer {
 	};
 
 	return Object.keys(rootState).reduce((result, key) => {
-		result[key] = simpleReducerFactory(rootState[key]);
+		result[key] = simpleReducerFactory(key, rootState[key]);
 		return result;
 	}, initialValue);
 }

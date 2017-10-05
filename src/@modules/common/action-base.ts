@@ -2,10 +2,13 @@ import { Action } from 'redux';
 import { dispatch } from '@angular-redux/store';
 
 export abstract class ActionBase implements Action {
+	abstract module: string;
 	abstract type: string;
 
 	@dispatch()
-	dispatch = () => {
+	dispatch = () => this.build()
+
+	public build = () => {
 		const result: any = {};
 
 		for (const key in this) {
@@ -14,12 +17,10 @@ export abstract class ActionBase implements Action {
 			result[key] = this[key];
 		}
 
-		result.reduce = this.reduce;
-
 		return result;
 	}
 
-	reduce(state) {
+	protected reduce(state) {
 		return state;
 	}
 }

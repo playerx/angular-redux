@@ -17,15 +17,15 @@ export class Epics {
 	@Epic()
 	LoadList = stream => stream
 		.ofType(actions.Types.LoadList)
-		.map(x => { console.log('asd'); return x; })
+		.map(x => x)
 		.switchMap(x =>
 			this.loanService.loadList()
-				.map(items => new actions.LoadListSuccess(items))
-				.catch(err => of(new actions.LoadListError(err)))
+				.map(items => new actions.LoadListSuccess(items).build())
+				.catch(err => of(new actions.LoadListError(err).build()))
 		)
 
 	@Epic()
 	Ping = (x) => x
 		.ofType(actions.Types.Ping)
-		.mapTo({ type: 'PONG' })
+		.mapTo(new actions.Pong().build())
 }

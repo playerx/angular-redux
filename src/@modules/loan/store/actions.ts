@@ -4,20 +4,22 @@ import { Action } from 'redux';
 import { ActionBase } from '@modules/common';
 
 
-const ROOT = '[User] ';
+export const Module = '[User]';
 
 export const Types = {
-	LoadList: ROOT + 'Load List',
-	LoadListSuccess: ROOT + 'Load List Success',
-	LoadListError: ROOT + 'Load List Error',
-	LoadById: ROOT + 'Load by id',
-	Add: ROOT + 'Add',
-	Ping: ROOT + 'Ping',
+	LoadList: Module + 'Load List',
+	LoadListSuccess: Module + 'Load List Success',
+	LoadListError: Module + 'Load List Error',
+	LoadById: Module + 'Load by id',
+	Add: Module + 'Add',
+	Ping: Module + 'Ping',
+	Pong: Module + 'Pong',
 };
 
 
 
 export class LoadList extends ActionBase {
+	module = Module;
 	type = Types.LoadList;
 
 	constructor(
@@ -37,7 +39,8 @@ export class LoadList extends ActionBase {
 }
 
 export class LoadListSuccess extends ActionBase {
-	type = Types.LoadList;
+	module = Module;
+	type = Types.LoadListSuccess;
 
 	constructor(
 		private items: any[],
@@ -45,11 +48,12 @@ export class LoadListSuccess extends ActionBase {
 
 	reduce(state) {
 		console.log('LoadListSuccess', this.items);
-		return state;
+		return { items: [1, 2, 3] };
 	}
 }
 
 export class LoadListError extends ActionBase {
+	module = Module;
 	type = Types.LoadListError;
 
 	constructor(
@@ -63,10 +67,11 @@ export class LoadListError extends ActionBase {
 }
 
 export class Ping extends ActionBase {
+	module = Module;
 	type = Types.Ping;
+}
 
-	reduce(state) {
-		console.log('Ping');
-		return state;
-	}
+export class Pong extends ActionBase {
+	module = Module;
+	type = Types.Pong;
 }

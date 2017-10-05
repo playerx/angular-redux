@@ -8,7 +8,7 @@ import { RootReducer } from './root.reducer';
 import { RootEpics } from './root.epics';
 
 // The top-level reducers and epics that make up our app's logic.
-import { AppState, DefaultAppState } from './root.model';
+import { DefaultAppState } from './root.model';
 // import { RootEpics } from './epics';
 
 
@@ -18,7 +18,7 @@ import { AppState, DefaultAppState } from './root.model';
 })
 export class StoreModule {
 	constructor(
-		public store: NgRedux<AppState>,
+		public store: NgRedux<any>,
 		devTools: DevToolsExtension,
 		// ngReduxRouter: NgReduxRouter,
 		rootReducer: RootReducer,
@@ -31,7 +31,7 @@ export class StoreModule {
 			rootReducer.compose(),
 			DefaultAppState,
 			[...rootEpics.compose()],
-			devTools.isEnabled() ? [] : []);
+			devTools.isEnabled() ? [devTools.enhancer()] : []);
 
 		// // Enable syncing of Angular router state with our Redux store.
 		// if (ngReduxRouter) {
