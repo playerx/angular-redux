@@ -2,11 +2,21 @@ import { Action } from 'redux';
 import { dispatch } from '@angular-redux/store';
 
 export abstract class ActionBase implements Action {
-	abstract module: string;
-	abstract type: string;
+
+	set module(value: string) {
+		this.moduleName = value;
+		this.type = this.moduleName + ' ' + this.constructor.name;
+	}
+
+	private moduleName: string;
+	type: string;
 
 	@dispatch()
 	dispatch = () => this.build()
+
+	constructor() {
+		this.type = this.constructor.name;
+	}
 
 	public build = () => {
 		const result: any = {};

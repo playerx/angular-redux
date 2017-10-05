@@ -4,29 +4,29 @@ import { Action } from 'redux';
 import { ActionBase } from '@modules/common';
 
 
-export const Module = '[User]';
+export const Module = '[Loan]';
 
 export const Types = {
-	LoadList: Module + 'Load List',
-	LoadListSuccess: Module + 'Load List Success',
-	LoadListError: Module + 'Load List Error',
-	LoadById: Module + 'Load by id',
-	Add: Module + 'Add',
-	Ping: Module + 'Ping',
-	Pong: Module + 'Pong',
+	LoadList: Module + ' Load List',
+	LoadListSuccess: Module + ' Load List Success',
+	LoadListError: Module + ' Load List Error',
+	LoadById: Module + ' Load by id',
+	Add: Module + ' Add',
+	Ping: Module + ' Ping',
+	Pong: Module + ' Pong',
 };
 
 
 
 export class LoadList extends ActionBase {
 	module = Module;
-	type = Types.LoadList;
 
 	constructor(
 		private nameFilter?: string,
 		private fromAge?: number,
 		private toAge?: number,
 	) { super(); }
+
 
 	reduce(state) {
 		console.log('LoadList', this.nameFilter, this.fromAge, this.toAge, this.test(5));

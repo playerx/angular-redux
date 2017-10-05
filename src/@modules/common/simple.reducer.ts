@@ -2,16 +2,15 @@ import { Reducer } from 'redux';
 
 
 const simpleReducerFactory = function (module, initialState) {
-	initialState = null;
 
 	return function simpleReducer<TState>(state: TState, action): Reducer<TState> {
 
 		if (!action.reduce) {
-			return initialState;
+			return state || initialState;
 		}
 
 		if (module !== action.module) {
-			return;
+			return state || initialState;
 		}
 
 		return action.reduce(state || initialState);
