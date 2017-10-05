@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { UserModule } from '@modules/user/module';
+import { LoanModule } from '@modules/loan';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from './store/module';
@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 		BrowserModule,
 		// RouterModule.forRoot(),
 		StoreModule,
-		UserModule
+		LoanModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

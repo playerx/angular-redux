@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserActions } from '@modules/user/api';
+import * as loan from '@modules/loan';
+
 
 @Component({
 	selector: 'app-root',
@@ -9,15 +10,10 @@ import { UserActions } from '@modules/user/api';
 export class AppComponent implements OnInit {
 	title = 'app';
 
-
-	constructor(
-		private userActions: UserActions
-	) { }
-
+	constructor() { }
 
 	ngOnInit() {
-		this.userActions.LoadList();
-		// this.userActions.Ping();
-		// this.userActions.Ping();
+		new loan.LoadList().dispatch();
+		new loan.Ping().dispatch();
 	}
 }

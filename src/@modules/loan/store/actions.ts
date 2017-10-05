@@ -6,7 +6,7 @@ import { ActionBase } from '@modules/common';
 
 const ROOT = '[User] ';
 
-export const ActionTypes = {
+export const Types = {
 	LoadList: ROOT + 'Load List',
 	LoadListSuccess: ROOT + 'Load List Success',
 	LoadListError: ROOT + 'Load List Error',
@@ -18,25 +18,55 @@ export const ActionTypes = {
 
 
 export class LoadList extends ActionBase {
-	type = ActionTypes.LoadList;
+	type = Types.LoadList;
+
+	constructor(
+		private nameFilter?: string,
+		private fromAge?: number,
+		private toAge?: number,
+	) { super(); }
 
 	reduce(state) {
-		console.log('LoadList');
+		console.log('LoadList', this.nameFilter, this.fromAge, this.toAge, this.test(5));
 		return state;
+	}
+
+	private test(n) {
+		return n + 1;
 	}
 }
 
 export class LoadListSuccess extends ActionBase {
-	type = ActionTypes.LoadList;
+	type = Types.LoadList;
 
 	constructor(
-		public list: any[]
+		private items: any[],
 	) { super(); }
 
 	reduce(state) {
-		console.log('LoadListSuccess');
+		console.log('LoadListSuccess', this.items);
 		return state;
 	}
 }
 
+export class LoadListError extends ActionBase {
+	type = Types.LoadListError;
 
+	constructor(
+		private error: any,
+	) { super(); }
+
+	reduce(state) {
+		console.log('LoadListError', this.error);
+		return state;
+	}
+}
+
+export class Ping extends ActionBase {
+	type = Types.Ping;
+
+	reduce(state) {
+		console.log('Ping');
+		return state;
+	}
+}

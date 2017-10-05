@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 
 @Injectable()
-export class UserService {
+export class LoanService {
 
 	loadList() {
 

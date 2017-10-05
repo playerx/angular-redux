@@ -31,7 +31,7 @@ export class StoreModule {
 			rootReducer.compose(),
 			DefaultAppState,
 			[...rootEpics.compose()],
-			devTools.isEnabled() ? [devTools.enhancer()] : []);
+			devTools.isEnabled() ? [] : []);
 
 		// // Enable syncing of Angular router state with our Redux store.
 		// if (ngReduxRouter) {

@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StoreModule } from 'app/store/module';
-import { UserService, Dispat, UserReducer, UserEpics } from '@modules/user/api';
 
-import { } from './api/'
+import { Epics } from './store/epics';
+import { LoanService } from './services/loan.service';
 
 
 @NgModule({
 	declarations: [],
 	exports: [],
 	imports: [StoreModule, CommonModule],
-	providers: [UserEpics, UserReducer, UserActions, UserService],
+	providers: [Epics, LoanService],
 })
-export class UserModule { }
+export class LoanModule { }
