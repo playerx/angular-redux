@@ -6,17 +6,6 @@ import { ActionBase } from '@modules/common';
 
 export const Module = '[Loan]';
 
-export const Types = {
-	LoadList: Module + ' Load List',
-	LoadListSuccess: Module + ' Load List Success',
-	LoadListError: Module + ' Load List Error',
-	LoadById: Module + ' Load by id',
-	Add: Module + ' Add',
-	Ping: Module + ' Ping',
-	Pong: Module + ' Pong',
-};
-
-
 
 export class LoadList extends ActionBase {
 	module = Module;
@@ -29,7 +18,7 @@ export class LoadList extends ActionBase {
 
 
 	reduce(state) {
-		console.log('LoadList', this.nameFilter, this.fromAge, this.toAge, this.test(5));
+		console.log('Success2', this.nameFilter, this.fromAge, this.toAge, this.test(5));
 		return state;
 	}
 
@@ -40,21 +29,20 @@ export class LoadList extends ActionBase {
 
 export class LoadListSuccess extends ActionBase {
 	module = Module;
-	type = Types.LoadListSuccess;
+	title = 'Listo';
 
 	constructor(
 		private items: any[],
 	) { super(); }
 
 	reduce(state) {
-		console.log('LoadListSuccess', this.items);
+		console.log('[User][Main] LoadListSuccess', this.items);
 		return { items: [1, 2, 3] };
 	}
 }
 
 export class LoadListError extends ActionBase {
 	module = Module;
-	type = Types.LoadListError;
 
 	constructor(
 		private error: any,
@@ -68,10 +56,30 @@ export class LoadListError extends ActionBase {
 
 export class Ping extends ActionBase {
 	module = Module;
-	type = Types.Ping;
 }
 
 export class Pong extends ActionBase {
 	module = Module;
-	type = Types.Pong;
+}
+
+
+export class LoadCustomerRequest extends ActionBase {
+	module = Module;
+
+	constructor(
+		private filterName: string,
+		private filterSurname: string,
+	) { super(); }
+}
+
+export class LoadCustomerComplete extends ActionBase {
+	module = Module;
+
+	constructor(
+		private items: any[]
+	) { super(); }
+
+	reduce(state) {
+		// this.items;
+	}
 }

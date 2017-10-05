@@ -16,8 +16,7 @@ export class Epics {
 
 	@Epic()
 	LoadList = stream => stream
-		.ofType(actions.Types.LoadList)
-		.map(x => x)
+		.filter(x => x.type === actions.LoadList.Type)
 		.switchMap(x =>
 			this.loanService.loadList()
 				.map(items => new actions.LoadListSuccess(items).build())
@@ -26,6 +25,6 @@ export class Epics {
 
 	@Epic()
 	Ping = (x) => x
-		.ofType(actions.Types.Ping)
+		.ofType(actions.Pong.Type)
 		.mapTo(new actions.Pong().build())
 }

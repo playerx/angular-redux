@@ -9,7 +9,7 @@ const simpleReducerFactory = function (module, initialState) {
 			return state || initialState;
 		}
 
-		if (module !== action.module) {
+		if ((module || action.module) && (module !== action.module)) {
 			return state || initialState;
 		}
 

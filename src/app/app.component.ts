@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		new loan.LoadList().dispatch();
-		new loan.Ping().dispatch();
+		// new loan.Ping().dispatch();
 	}
 }
