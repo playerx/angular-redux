@@ -31,7 +31,7 @@ export const InitialState = {
 
 
 @Injectable()
-export class Store extends StoreBase<MainAction> {
+export class Store extends StoreBase<MainAction, any> {
 
 	reducerMap = {
 		mainPage: this.mainPageStore.reducer,
@@ -44,10 +44,7 @@ export class Store extends StoreBase<MainAction> {
 	];
 
 
-	reducer(state = InitialState, action: MainAction): any {
-
-		console.log('Module Level', state, action);
-
+	reducer = (state = InitialState, action: MainAction) => {
 		switch (action.type) {
 			case ActionType.LoadList:
 				return state;

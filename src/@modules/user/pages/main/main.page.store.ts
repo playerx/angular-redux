@@ -28,9 +28,9 @@ export const InitialState = {
 
 
 @Injectable()
-export class Store extends StoreBase<MainAction> {
+export class Store extends StoreBase<MainAction, any> {
 
-	reducer(state = InitialState, action: MainAction): any {
+	reducer = (state = InitialState, action: MainAction): any => {
 
 		console.log(state, action);
 

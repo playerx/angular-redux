@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // import { LoanModule } from '@modules/loan';
 import { UserModule } from '@modules/user';
+import { HRModule } from '@modules/hr';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from './common/store.module';
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
 		BrowserModule,
 		// RouterModule.forRoot(),
 		StoreModule,
-		UserModule
+		UserModule,
+		HRModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
