@@ -9,6 +9,8 @@ import { createEpics } from 'redux-observable-decorator';
 import * as user from '@modules/user';
 import * as hr from '@modules/hr';
 
+declare var window: any;
+
 
 @NgModule({
 	imports: [NgReduxModule]
@@ -32,13 +34,17 @@ export class StoreModule {
 		store.configureStore(
 			initialConfig.rootReducer,
 			initialConfig.initialState,
-			initialConfig.epics,
+			[...initialConfig.epics],
 			devTools.isEnabled() ? [devTools.enhancer()] : []);
 
 		// // Enable syncing of Angular router state with our Redux store.
 		// if (ngReduxRouter) {
 		// 	ngReduxRouter.initialize();
 		// }
+
+		if (window.devToolsExtension) {
+			window.devToolsExtension.updateStore(store['_store']);
+		}
 
 		// Enable syncing of Angular form state with our Redux store.
 		provideReduxForms(store);
