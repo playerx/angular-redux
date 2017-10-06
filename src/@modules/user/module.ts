@@ -1,16 +1,17 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 // import { StoreModule } from 'app/store/module';
-// import { UserService, Dispat, UserReducer, UserEpics } from '@modules/user/api';
 
-// import { } from './api/'
+import { UserService } from './services/user.service';
+import { Store as MainPageStore } from './pages/main/main.page.store';
+import { Store as ModuleStore } from './store';
 
 
-// @NgModule({
-// 	declarations: [],
-// 	exports: [],
-// 	imports: [StoreModule, CommonModule],
-// 	providers: [UserEpics, UserReducer, UserActions, UserService],
-// })
-// export class UserModule { }
+@NgModule({
+	declarations: [],
+	exports: [],
+	imports: [CommonModule],
+	providers: [MainPageStore, ModuleStore, UserService],
+})
+export class UserModule { }

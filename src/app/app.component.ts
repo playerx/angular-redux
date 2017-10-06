@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as loan from '@modules/loan';
+import * as user from '@modules/user';
 
 
 @Component({
@@ -10,10 +11,13 @@ import * as loan from '@modules/loan';
 export class AppComponent implements OnInit {
 	title = 'app';
 
-	constructor() { }
+	constructor(private userStore: user.Store) { }
 
 	ngOnInit() {
-		new loan.LoadList().dispatch();
-		// new loan.Ping().dispatch();
+		this.userStore.dispatch({
+			type: user.ActionType.LoadList,
+			filterName: '',
+			filterSurname: ''
+		});
 	}
 }

@@ -5,13 +5,16 @@ import { of } from 'rxjs/observable/of';
 import { UserService } from '@modules/user/services/user.service';
 import { Action } from 'redux';
 import { Observable } from 'rxjs/Rx';
+import { StoreBase } from '@modules/common';
+import { ActionsObservable } from 'redux-observable';
 
 
 enum ActionType {
-	LoadList = '[User][Main] LoadList',
-	LoadListSuccess = '[User][Main] LoadListSuccess',
-	LoadListError = '[User][Main] LoadListError',
+	LoadList = 1, // '[User][Main] LoadList',
+	LoadListSuccess = 2, // '[User][Main] LoadListSuccess',
+	LoadListError = 3, // '[User][Main] LoadListError',
 }
+
 
 type MainAction
 	= { type: ActionType.LoadList, filterName: string, filterSurname: string }
@@ -19,38 +22,43 @@ type MainAction
 	| { type: ActionType.LoadListError, error: any };
 
 
+export const InitialState = {
+	items: []
+};
+
 
 @Injectable()
-export class MainPageStore {
+export class Store extends StoreBase<MainAction> {
 
-	initialState = {
-		items: []
-	};
+	reducer(state = InitialState, action: MainAction): any {
 
-	reducer(state = this.initialState, action: MainAction) {
+		console.log(state, action);
+
 		switch (action.type) {
 			case ActionType.LoadList:
 				return state;
 
 			case ActionType.LoadListSuccess:
 				return state;
+
+			default:
+				return state;
 		}
-		return state;
 	}
 
 
 
 	constructor(
 		private userService: UserService
-	) { }
+	) { super(); }
 
 
 	@Epic()
-	LoadList = stream => stream
+	LoadList = (stream: ActionsObservable<MainAction>) => stream
 		.ofType(ActionType.LoadList)
 		.switchMap(x =>
 			this.userService.loadList()
 				.map(items => (<MainAction>{ type: ActionType.LoadListSuccess, items: items }))
-				.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: 'err' }))
+				.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: err }))
 		)
 }
