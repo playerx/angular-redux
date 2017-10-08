@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 // import { LoanModule } from '@modules/loan';
 import { UserModule } from '@modules/user';
@@ -16,10 +17,11 @@ import { RouterModule } from '@angular/router';
 	],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		// RouterModule.forRoot(),
-		StoreModule,
 		UserModule,
-		HRModule
+		HRModule,
+		StoreModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

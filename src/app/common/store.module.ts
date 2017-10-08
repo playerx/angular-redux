@@ -64,7 +64,7 @@ export class StoreModule {
 
 			initialState[key] = items[key].InitialState;
 			reducerMap[key] = items[key].reducer;
-			epicClasses.push(items[key].Store);
+			epicClasses.push(...items[key].epics);
 		}
 
 		// Reducers

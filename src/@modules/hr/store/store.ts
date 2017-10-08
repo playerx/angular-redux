@@ -22,7 +22,17 @@ export class Store extends StoreBase<Actions, State> {
 		.ofType(ActionType.LoadList)
 		.switchMap(x =>
 			this.userService.loadList()
-				.map(items => (<Actions>{ type: ActionType.LoadListSuccess, items: items }))
+				.map(data => (<Actions>{ type: ActionType.LoadListSuccess, items: data }))
 				.catch(err => of(<Actions>{ type: ActionType.LoadListError, error: err }))
 		)
+
+
+	// @Epic()
+	// LoadSuccess = (stream: ActionsObservable<Actions>) => stream
+	// 	.ofType(ActionType.LoadListSuccess)
+	// 	.switchMap(x =>
+	// 		this.userService.loadList()
+	// 			.map(items => (<Actions>{ type: ActionType.LoadListSuccess, items: items }))
+	// 			.catch(err => of(<Actions>{ type: ActionType.LoadListError, error: err }))
+	// 	)
 }

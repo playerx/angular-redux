@@ -2,7 +2,7 @@
 export interface StoreConfig {
 	InitialState: any;
 	reducer: any;
-	Store: any;
+	epics: any[];
 }
 
 
