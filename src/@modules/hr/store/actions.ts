@@ -5,7 +5,13 @@ export enum ActionType {
 	LoadListError = '[HR][Main] LoadListError',
 }
 
-export type Actions
+export type PublicAction
 	= { type: ActionType.LoadList, filterName: string, filterSurname: string }
 	| { type: ActionType.LoadListSuccess, items: any[] }
 	| { type: ActionType.LoadListError, error: any };
+
+
+export type Action
+	= { type: 'Test' }
+	| { type: 'Test2' }
+	| PublicAction;

@@ -1,13 +1,13 @@
 import { dispatch } from '@angular-redux/store';
 import { Action } from 'redux';
 
-export abstract class StoreBase<TAction extends Action, TState>{
+export abstract class StoreBase<TAction extends Action>{
 
-	reducerMap: any;
+	// reducerMap: any;
 
-	epics: any[];
+	// epics: any[];
 
-	reducer: (state: TState, action: TAction) => TState;
+	// reducer: (state: TState, action: TAction) => TState;
 
 	@dispatch()
 	dispatch = (action: TAction) => action

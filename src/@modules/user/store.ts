@@ -31,7 +31,7 @@ export const InitialState = {
 
 
 @Injectable()
-export class Store extends StoreBase<MainAction, any> {
+export class Store extends StoreBase<MainAction> {
 
 	reducerMap = {
 		mainPage: this.mainPageStore.reducer,
