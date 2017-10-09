@@ -42,6 +42,18 @@ export class StoreModule {
 		// 	ngReduxRouter.initialize();
 		// }
 
+
+		setTimeout(() => {
+			const state = { test: true };
+
+			store.replaceReducer((a, b) => {
+				console.log('asdasdada', a, b, state);
+				return state;
+			}); // Trivial reducer that just returns the saved state.
+			store.dispatch({ type: 'REHYDRATE' }); // Bogus action to trigger the reducer above.
+			store.replaceReducer(initialConfig.rootReducer);
+		}, 5000);
+
 		if (window.devToolsExtension) {
 			window.devToolsExtension.updateStore(store['_store']);
 		}
