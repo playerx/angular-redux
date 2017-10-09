@@ -31,10 +31,11 @@ export const InitialState = {
 
 
 @Injectable()
-export class Store extends StoreBase<MainAction> {
+export class Store extends StoreBase<MainAction, any> {
+	moduleName = '';
 
 	reducerMap = {
-		mainPage: this.mainPageStore.reducer,
+		// mainPage: this.mainPageStore.reducer,
 		list23232: (state = InitialState.list23232) => state,
 	};
 
@@ -58,18 +59,18 @@ export class Store extends StoreBase<MainAction> {
 	}
 
 
-	constructor(
-		private mainPageStore: mainPage.Store,
-		private userService: UserService
-	) { super(); }
+	// constructor(
+	// 	private mainPageStore: mainPage.Store,
+	// 	private userService: UserService
+	// ) { super(); }
 
 
-	@Epic()
-	LoadList = (stream: ActionsObservable<MainAction>) => stream
-		.ofType(ActionType.LoadList)
-		.switchMap(x =>
-			this.userService.loadList()
-				.map(items => (<MainAction>{ type: ActionType.LoadListSuccess, items: items }))
-				.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: err }))
-		)
+	// @Epic()
+	// LoadList = (stream: ActionsObservable<MainAction>) => stream
+	// 	.ofType(ActionType.LoadList)
+	// 	.switchMap(x =>
+	// 		this.userService.loadList()
+	// 			.map(items => (<MainAction>{ type: ActionType.LoadListSuccess, items: items }))
+	// 			.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: err }))
+	// 	)
 }

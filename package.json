@@ -26,6 +26,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "redux": "^3.7.2",
+    "redux-dynamic-middlewares": "^0.2.1",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.16.0",
     "redux-observable-decorator": "^1.1.0",

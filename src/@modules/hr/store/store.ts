@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { StoreBase, createEmptyReducer } from '@modules/common';
-import { PublicAction, Action, ActionType } from './actions';
-import { Epic } from 'redux-observable-decorator';
-import { ActionsObservable } from 'redux-observable';
-import { of } from 'rxjs/observable/of';
-
-import { UserService } from '../services/user.service';
-import { InitialState, State } from './state';
+import { StoreBase } from '@modules/common';
+import { Action } from './actions';
+import { NgRedux, Comparator, Selector } from '@angular-redux/store';
+import { Observable } from 'rxjs/Rx';
+import { State } from './state';
+import { resolveToFunctionSelector } from '@angular-redux/store/lib/src/components/selectors';
 
 
 @Injectable()
-export class Store extends StoreBase<Action> { }
+export class Store extends StoreBase<Action, State> {
+	moduleName = 'HR';
+}

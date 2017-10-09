@@ -5,3 +5,4 @@ export * from './composite.reducer';
 export * from './store-base';
 export * from './store-config';
 export * from './empty-reducer';
+export * from './store.module';

@@ -1,55 +1,15 @@
-import { NgModule, Injector } from '@angular/core';
+import { NgModule, Injector, ModuleWithProviders } from '@angular/core';
 import { StoreConfig, StoreConfigs } from '@modules/common';
 import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { NgReduxRouterModule, NgReduxRouter, routerReducer } from '@angular-redux/router';
 import { provideReduxForms, composeReducers, defaultFormReducer } from '@angular-redux/form';
-import { combineReducers } from 'redux';
+import { combineReducers, applyMiddleware } from 'redux';
 import { createEpics } from 'redux-observable-decorator';
+import { addMiddleware, dynamicMiddlewares } from './dynamic.middleware';
 
 declare var window: any;
 
-
 const storeConfigs: StoreConfigs = {};
-
-function reigsterModules(): StoreConfig {
-	const items = this.storeConfigs;
-
-	// Initial State
-	const initialState = {};
-	const reducerMap = {};
-	const epicClasses = [];
-
-	for (const key in items) {
-		if (!items.hasOwnProperty(key)) { continue; }
-
-		initialState[key] = items[key].InitialState;
-		reducerMap[key] = items[key].reducer;
-		epicClasses.push(...items[key].epics);
-	}
-
-	// Reducers
-	const rootReducer = composeReducers(
-		defaultFormReducer(),
-		combineReducers({
-			router: routerReducer,
-			...reducerMap
-		})
-	);
-
-	// Epics
-	const epicInstances = epicClasses.map(x => {
-		return this.injector.get(x);
-	});
-
-	const epics = epicInstances.map(x => createEpics(x));
-
-
-	return {
-		InitialState: initialState,
-		reducer: rootReducer,
-		epics: epics
-	};
-}
 
 
 @NgModule({
@@ -57,40 +17,18 @@ function reigsterModules(): StoreConfig {
 })
 export class RootStoreModule {
 
-	// storeConfigs: StoreConfigs = {
-	// 	'HR': hr.storeConfig,
-	// };
-
 	constructor(
 		private injector: Injector,
 		public store: NgRedux<any>,
 		devTools: DevToolsExtension,
 	) {
-		const initialConfig = this.reigsterModules();
+		const newConfig = this.reigsterModules();
 
-		// Tell Redux about our reducers and epics. If the Redux DevTools
-		// chrome extension is available in the browser, tell Redux about
-		// it too.
 		store.configureStore(
-			initialConfig.rootReducer,
-			initialConfig.initialState,
-			[...initialConfig.epics],
+			newConfig.reducer,
+			newConfig.InitialState,
+			[dynamicMiddlewares],
 			devTools.isEnabled() ? [devTools.enhancer()] : []);
-
-		// // Enable syncing of Angular router state with our Redux store.
-		// if (ngReduxRouter) {
-		// 	ngReduxRouter.initialize();
-		// }
-
-
-		const state = { test: true };
-
-		store.replaceReducer((a, b) => {
-			console.log('asdasdada', a, b, state);
-			return state;
-		}); // Trivial reducer that just returns the saved state.
-		store.dispatch({ type: 'REHYDRATE' }); // Bogus action to trigger the reducer above.
-		store.replaceReducer(initialConfig.rootReducer);
 
 		if (window.devToolsExtension) {
 			window.devToolsExtension.updateStore(store['_store']);
@@ -100,9 +38,9 @@ export class RootStoreModule {
 		provideReduxForms(store);
 	}
 
-	reigsterModules(): any {
 
-		const items = this.storeConfigs;
+	reigsterModules(): StoreConfig {
+		const items = storeConfigs;
 
 		// Initial State
 		const initialState = {};
@@ -135,8 +73,8 @@ export class RootStoreModule {
 
 
 		return {
-			rootReducer: rootReducer,
-			initialState: initialState,
+			InitialState: initialState,
+			reducer: rootReducer,
 			epics: epics
 		};
 	}
@@ -149,54 +87,31 @@ export class RootStoreModule {
 })
 export class StoreModule {
 
-	storeConfigs: StoreConfigs = {
-		'HR': hr.storeConfig,
-	};
-
 	constructor(
 		private injector: Injector,
 		public store: NgRedux<any>,
-		devTools: DevToolsExtension,
+		private devTools: DevToolsExtension,
 	) {
-		const initialConfig = this.reigsterModules();
+		const newConfig = this.reigsterModules();
 
-		// Tell Redux about our reducers and epics. If the Redux DevTools
-		// chrome extension is available in the browser, tell Redux about
-		// it too.
-		store.configureStore(
-			initialConfig.rootReducer,
-			initialConfig.initialState,
-			[...initialConfig.epics],
-			devTools.isEnabled() ? [devTools.enhancer()] : []);
+		store.replaceReducer(x => newConfig.InitialState); // Trivial reducer that just returns the saved state.
+		store.dispatch({ type: 'REHYDRATE' }); // Bogus action to trigger the reducer above.
+		store.replaceReducer(newConfig.reducer);
 
-		// // Enable syncing of Angular router state with our Redux store.
-		// if (ngReduxRouter) {
-		// 	ngReduxRouter.initialize();
-		// }
-
-
-		setTimeout(() => {
-			const state = { test: true };
-
-			store.replaceReducer((a, b) => {
-				console.log('asdasdada', a, b, state);
-				return state;
-			}); // Trivial reducer that just returns the saved state.
-			store.dispatch({ type: 'REHYDRATE' }); // Bogus action to trigger the reducer above.
-			store.replaceReducer(initialConfig.rootReducer);
-		}, 5000);
-
-		if (window.devToolsExtension) {
-			window.devToolsExtension.updateStore(store['_store']);
-		}
-
-		// Enable syncing of Angular form state with our Redux store.
-		provideReduxForms(store);
+		newConfig.epics.forEach(x => addMiddleware(x));
 	}
 
-	reigsterModules(): any {
+	static Config(moduleName: string, config: StoreConfig): ModuleWithProviders {
 
-		const items = this.storeConfigs;
+		storeConfigs[moduleName] = config;
+
+		return {
+			ngModule: StoreModule
+		};
+	}
+
+	reigsterModules(): StoreConfig {
+		const items = storeConfigs;
 
 		// Initial State
 		const initialState = {};
@@ -229,8 +144,8 @@ export class StoreModule {
 
 
 		return {
-			rootReducer: rootReducer,
-			initialState: initialState,
+			InitialState: initialState,
+			reducer: rootReducer,
 			epics: epics
 		};
 	}

@@ -30,6 +30,8 @@ export const InitialState = {
 @Injectable()
 export class Store extends StoreBase<MainAction, any> {
 
+	moduleName = '';
+
 	reducer = (state = InitialState, action: MainAction): any => {
 
 		console.log(state, action);
@@ -48,17 +50,13 @@ export class Store extends StoreBase<MainAction, any> {
 
 
 
-	constructor(
-		private userService: UserService
-	) { super(); }
 
-
-	@Epic()
-	LoadList = (stream: ActionsObservable<MainAction>) => stream
-		.ofType(ActionType.LoadList)
-		.switchMap(x =>
-			this.userService.loadList()
-				.map(items => (<MainAction>{ type: ActionType.LoadListSuccess, items: items }))
-				.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: err }))
-		)
+	// @Epic()
+	// LoadList = (stream: ActionsObservable<MainAction>) => stream
+	// 	.ofType(ActionType.LoadList)
+	// 	.switchMap(x =>
+	// 		this.userService.loadList()
+	// 			.map(items => (<MainAction>{ type: ActionType.LoadListSuccess, items: items }))
+	// 			.catch(err => of(<MainAction>{ type: ActionType.LoadListError, error: err }))
+	// 	)
 }

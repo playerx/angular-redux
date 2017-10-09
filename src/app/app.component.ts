@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as loan from '@modules/loan';
 import * as user from '@modules/user';
 import * as hr from '@modules/hr';
+import { Observable } from 'rxjs/Rx';
 
 
 @Component({
@@ -12,12 +13,16 @@ import * as hr from '@modules/hr';
 export class AppComponent implements OnInit {
 	title = 'app';
 
+	items$: Observable<any>;
+
 	constructor(
 		private userStore: user.Store,
 		private hrStore: hr.Store,
 	) { }
 
 	ngOnInit() {
+		this.items$ = this.hrStore.select(x => x.list23232);
+
 		this.userStore.dispatch({
 			type: user.ActionType.LoadList,
 			filterName: '',

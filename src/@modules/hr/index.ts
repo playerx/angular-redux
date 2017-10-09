@@ -6,14 +6,15 @@ import { Epics } from './store/epics';
 
 
 export { ActionType } from './store/actions';
+export { State } from './store/state';
 export * from './store/store';
 export * from './module';
 
 
-export const storeConfig: StoreConfig = {
-	InitialState,
-	reducer,
-	epics: [
-		Epics
-	],
-};
+// export const storeConfig: StoreConfig = {
+// 	InitialState,
+// 	reducer,
+// 	epics: [
+// 		Epics
+// 	],
+// };

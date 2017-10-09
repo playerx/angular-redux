@@ -19,10 +19,11 @@ export class Epics {
 	@Epic()
 	LoadList = (stream: ActionsObservable<Action>) => stream
 		.ofType(ActionType.LoadList)
-		.switchMap(x =>
-			this.userService.loadList()
+		.switchMap(x => {
+			return this.userService.loadList()
 				.map(data => (<Action>{ type: ActionType.LoadListSuccess, items: data }))
-				.catch(err => of(<Action>{ type: ActionType.LoadListError, error: err }))
+				.catch(err => of(<Action>{ type: ActionType.LoadListError, error: err }));
+		}
 		)
 
 }

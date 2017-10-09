@@ -7,8 +7,8 @@ import { UserModule } from '@modules/user';
 import { HRModule } from '@modules/hr';
 
 import { AppComponent } from './app.component';
-import { StoreModule } from './common/store.module';
 import { RouterModule } from '@angular/router';
+import { RootStoreModule } from '@modules/common';
 
 
 @NgModule({
@@ -20,8 +20,9 @@ import { RouterModule } from '@angular/router';
 		HttpClientModule,
 		// RouterModule.forRoot(),
 		UserModule,
+		RootStoreModule,
 		HRModule,
-		StoreModule,
+		// StoreModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]
