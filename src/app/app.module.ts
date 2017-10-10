@@ -8,7 +8,8 @@ import { HRModule } from '@modules/hr';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { RootStoreModule } from '@modules/common';
+
+import { StoreModule } from 'angular-redux-dynamic-modules';
 
 
 @NgModule({
@@ -19,10 +20,9 @@ import { RootStoreModule } from '@modules/common';
 		BrowserModule,
 		HttpClientModule,
 		// RouterModule.forRoot(),
+		StoreModule,
 		UserModule,
-		RootStoreModule,
 		HRModule,
-		// StoreModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

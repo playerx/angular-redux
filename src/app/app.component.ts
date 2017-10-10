@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as loan from '@modules/loan';
-import * as user from '@modules/user';
+// import * as loan from '@modules/loan';
+// import * as user from '@modules/user';
 import * as hr from '@modules/hr';
 import { Observable } from 'rxjs/Rx';
 
@@ -16,20 +16,20 @@ export class AppComponent implements OnInit {
 	items$: Observable<any>;
 
 	constructor(
-		private userStore: user.Store,
-		private hrStore: hr.Store,
+		// private userStore: user.Store,
+		private hrActions: hr.Actions,
 	) { }
 
 	ngOnInit() {
-		this.items$ = this.hrStore.select(x => x.list23232);
+		// this.items$ = this.hrStore.select(x => x.list23232);
 
-		this.userStore.dispatch({
-			type: user.ActionType.LoadList,
-			filterName: '',
-			filterSurname: ''
-		});
+		// this.userStore.dispatch({
+		// 	type: user.ActionType.LoadList,
+		// 	filterName: '',
+		// 	filterSurname: ''
+		// });
 
-		this.hrStore.dispatch({
+		this.hrActions.dispatch({
 			type: hr.ActionType.LoadList,
 			filterName: '',
 			filterSurname: ''

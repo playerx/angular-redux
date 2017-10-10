@@ -1,17 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// import { StoreModule } from 'app/store/module';
-
 import { UserService } from './services/user.service';
-import { Store as MainPageStore } from './pages/main/main.page.store';
-import { Store as ModuleStore } from './store';
+import { Actions } from './store/actions';
+
+import { InitialState } from './store/state';
+import { reducer } from './store/reducer';
+import { Epics } from './store/epics';
+
+import { StoreModule, StoreConfigService } from 'angular-redux-dynamic-modules';
 
 
 @NgModule({
 	declarations: [],
 	exports: [],
-	imports: [CommonModule],
-	providers: [MainPageStore, ModuleStore, UserService],
+	imports: [
+		CommonModule,
+	],
+	providers: [Actions, UserService, Epics],
 })
-export class UserModule { }
+export class UserModule {
+	constructor(storeConfig: StoreConfigService) {
+		// Register State
+		storeConfig.addModule(
+			'User',
+			InitialState,
+			reducer,
+			[Epics]
+		);
+	}
+}

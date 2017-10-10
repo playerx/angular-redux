@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { ActionsBase } from 'angular-redux-dynamic-modules';
 
 export enum ActionType {
-	LoadList = '[HR] LoadList',
-	LoadListSuccess = '[HR] LoadListSuccess',
-	LoadListError = '[HR] LoadListError',
+	LoadList = '[User] LoadList',
+	LoadListSuccess = '[User] LoadListSuccess',
+	LoadListError = '[User] LoadListError',
 }
 
 export type PublicAction
