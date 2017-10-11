@@ -8,7 +8,7 @@ export function reducer(state = InitialState, action: Action): State {
 			return state;
 
 		case ActionType.LoadListSuccess:
-			return { ...state, list23232: action.items };
+			return { ...state, items: action.items };
 
 		default:
 			return state;

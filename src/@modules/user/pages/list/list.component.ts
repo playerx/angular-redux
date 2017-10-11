@@ -16,7 +16,7 @@ import { AppState } from 'app/app.state';
 export class ListComponent implements OnInit {
 	title = 'user-list';
 
-	@select((x: AppState) => x.HR.list23232)
+	@select((x: AppState) => x.User.items)
 	items$: Observable<any>;
 
 	constructor(
