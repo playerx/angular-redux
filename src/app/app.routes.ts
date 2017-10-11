@@ -1,6 +1,5 @@
 export const appRoutes = [
-	{ path: '', redirectTo: '/elephants', pathMatch: 'full' },
-	// { path: 'elephants', component: ElephantPageComponent },
-	// { path: 'lions', component: LionPageComponent },
-	// { path: 'feedback', component: FeedbackFormComponent },
+	{ path: '', redirectTo: '/hr', pathMatch: 'full' },
+	{ path: 'hr', loadChildren: '@modules/hr/module#HRModule' },
+	{ path: 'user', loadChildren: '@modules/user/module#UserModule' },
 ];

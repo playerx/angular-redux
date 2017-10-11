@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		// private userStore: user.Store,
-		private hrActions: hr.Actions,
+		// private hrActions: hr.Actions,
 	) { }
 
 	ngOnInit() {
@@ -29,10 +29,10 @@ export class AppComponent implements OnInit {
 		// 	filterSurname: ''
 		// });
 
-		this.hrActions.dispatch({
-			type: hr.ActionType.LoadList,
-			filterName: '',
-			filterSurname: ''
-		});
+		// this.hrActions.dispatch({
+		// 	type: hr.ActionType.LoadList,
+		// 	filterName: '',
+		// 	filterSurname: ''
+		// });
 	}
 }

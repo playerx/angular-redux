@@ -12,6 +12,7 @@ export class UserService {
 	) { }
 
 	loadList() {
+		console.log('HTTP Request');
 		return this.http.get('http://x.jok.io/music/channel/list');
 
 		// return Observable.of([

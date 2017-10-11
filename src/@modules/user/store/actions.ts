@@ -4,12 +4,14 @@ import { ActionsBase } from 'angular-redux-dynamic-modules';
 
 export enum ActionType {
 	LoadList = '[User] LoadList',
+	LoadListStarted = '[User] LoadListStarted',
 	LoadListSuccess = '[User] LoadListSuccess',
 	LoadListError = '[User] LoadListError',
 }
 
 export type PublicAction
 	= { type: ActionType.LoadList, filterName: string, filterSurname: string }
+	| { type: ActionType.LoadListStarted }
 	| { type: ActionType.LoadListSuccess, items: any[] }
 	| { type: ActionType.LoadListError, error: any };
 

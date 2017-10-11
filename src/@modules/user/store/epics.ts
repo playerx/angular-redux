@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { StoreBase, createEmptyReducer } from '@modules/common';
 import { Action, ActionType } from './actions';
-import { Epic } from 'redux-observable-decorator';
 import { ActionsObservable } from 'redux-observable';
+import { Epic } from 'angular-redux-dynamic-modules';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/Rx';
 
@@ -23,8 +23,8 @@ export class Epics {
 		.switchMap(x => {
 			return this.userService.loadList()
 				.map(data => (<Action>{ type: ActionType.LoadListSuccess, items: data }))
-				.catch(err => of(<Action>{ type: ActionType.LoadListError, error: err }));
-		}
-		)
+				.catch(err => of(<Action>{ type: ActionType.LoadListError, error: err }))
+				.startWith(<Action>{ type: ActionType.LoadListStarted });
+		})
 
 }
