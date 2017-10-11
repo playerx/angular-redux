@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 // import * as loan from '@modules/loan';
-import * as user from '@modules/user';
-import * as hr from '@modules/hr';
+import * as user from '@modules/user/api';
+import * as hr from '@modules/hr/api';
 import { Observable } from 'rxjs/Rx';
+import { Dispatcher } from 'app/components/dispatcher';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
 	items$: Observable<any>;
 
 	constructor(
-		private store: NgRedux<any>
+		private store: Dispatcher<hr.PublicAction | user.PublicAction>
 	) { }
 
 	ngOnInit() {

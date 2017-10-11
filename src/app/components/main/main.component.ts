@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Dispatcher } from 'app/components/dispatcher';
-import * as user from '@modules/user';
-import * as hr from '@modules/hr';
-
+import * as user from '@modules/user/api';
+import * as hr from '@modules/hr/api';
 
 @Component({
 	selector: 'app-main',
@@ -20,7 +19,6 @@ export class MainComponent implements OnInit {
 
 	ngOnInit() {
 	}
-
 
 	loadHRList() {
 		this.store.dispatch({
