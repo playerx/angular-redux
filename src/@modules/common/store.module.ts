@@ -4,7 +4,6 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 import { NgReduxRouterModule, NgReduxRouter, routerReducer } from '@angular-redux/router';
 import { provideReduxForms, composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { combineReducers, applyMiddleware } from 'redux';
-import { createEpics } from 'redux-observable-decorator';
 import { addMiddleware, dynamicMiddlewares } from './dynamic.middleware';
 
 declare var window: any;

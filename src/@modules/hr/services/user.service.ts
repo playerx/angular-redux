@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Epic } from 'redux-observable-decorator';
 import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
