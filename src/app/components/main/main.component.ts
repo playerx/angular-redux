@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Dispatcher } from 'app/components/dispatcher';
-import * as user from '@modules/user/api';
-import * as hr from '@modules/hr/api';
+import * as user from '@modules/user';
+import * as hr from '@modules/hr';
 
 @Component({
 	selector: 'app-main',
