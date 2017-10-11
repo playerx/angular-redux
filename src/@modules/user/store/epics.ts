@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { StoreBase, createEmptyReducer } from '@modules/common';
 import { Action, ActionType } from './actions';
 import { ActionsObservable } from 'redux-observable';
 import { Epic } from 'angular-redux-dynamic-modules';
