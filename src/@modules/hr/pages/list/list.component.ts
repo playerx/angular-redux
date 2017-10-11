@@ -17,25 +17,10 @@ export class ListComponent implements OnInit {
 	items$: Observable<any>;
 
 	constructor(
-		// private userStore: user.Store,
-		// private hrActions: hr.Actions,
 		private store: NgRedux<any>
 	) { }
 
 	ngOnInit() {
-		// this.items$ = this.hrStore.select(x => x.list23232);
-
-		// this.userStore.dispatch({
-		// 	type: user.ActionType.LoadList,
-		// 	filterName: '',
-		// 	filterSurname: ''
-		// });
-
-		// this.hrActions.dispatch({
-		// 	type: hr.ActionType.LoadList,
-		// 	filterName: '',
-		// 	filterSurname: ''
-		// });
 	}
 
 	loadHRList() {

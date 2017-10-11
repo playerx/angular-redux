@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/Rx';
 
 import { UserService } from '../services/user.service';
-import { InitialState, State } from './state';
+import { InitialState, AppState } from './state';
 
 
 @Injectable()

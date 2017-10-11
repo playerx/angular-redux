@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 // import * as loan from '@modules/loan';
 import * as user from '@modules/user';
 import * as hr from '@modules/hr';
 import { Observable } from 'rxjs/Rx';
+import { Dispatcher } from 'app/components/dispatcher';
+import { AppState } from 'app/app.state';
 
 
 @Component({
@@ -14,28 +16,15 @@ import { Observable } from 'rxjs/Rx';
 export class ListComponent implements OnInit {
 	title = 'user-list';
 
+	@select((x: AppState) => x.HR.list23232)
 	items$: Observable<any>;
 
 	constructor(
-		// private userStore: user.Store,
-		// private hrActions: hr.Actions,
-		private store: NgRedux<any>
+		private store: Dispatcher<hr.PublicAction | user.PublicAction>
 	) { }
 
+
 	ngOnInit() {
-		// this.items$ = this.hrStore.select(x => x.list23232);
-
-		// this.userStore.dispatch({
-		// 	type: user.ActionType.LoadList,
-		// 	filterName: '',
-		// 	filterSurname: ''
-		// });
-
-		// this.hrActions.dispatch({
-		// 	type: hr.ActionType.LoadList,
-		// 	filterName: '',
-		// 	filterSurname: ''
-		// });
 	}
 
 

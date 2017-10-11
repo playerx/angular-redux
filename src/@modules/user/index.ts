@@ -1,3 +1,3 @@
-export { ActionType, Actions } from './store/actions';
+export { ActionType, Actions, PublicAction } from './store/actions';
 export { State } from './store/state';
 export * from './module';
