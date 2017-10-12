@@ -24,11 +24,11 @@
 		"@angular/platform-browser": "^4.0.0",
 		"@angular/platform-browser-dynamic": "^4.0.0",
 		"@angular/router": "^4.0.0",
+		"angular-redux-dynamic-modules": "0.2.1",
 		"core-js": "^2.4.1",
 		"redux": "^3.7.2",
 		"redux-logger": "^3.0.6",
 		"redux-observable": "^0.16.0",
-		"redux-observable-decorator": "^1.1.0",
 		"rxjs": "^5.4.1",
 		"zone.js": "^0.8.14"
 	},
@@ -51,6 +51,6 @@
 		"protractor": "~5.1.2",
 		"ts-node": "~3.0.4",
 		"tslint": "~5.3.2",
-		"typescript": "~2.3.3"
+		"typescript": "~2.5.3"
 	}
 }

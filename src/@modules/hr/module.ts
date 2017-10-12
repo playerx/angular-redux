@@ -24,20 +24,17 @@ import { ListComponent } from './pages/list/list.component';
 	],
 	providers: [Actions, UserService, Epics],
 })
-export class UserModule {
-
+export class HRModule {
 	constructor(
 		storeConfig: StoreConfigService,
 		epics: Epics
 	) {
-
 		// Register State
 		storeConfig.addModule(
-			'User',
+			'HR',
 			InitialState,
 			reducer,
 			[epics]
 		);
-
 	}
 }

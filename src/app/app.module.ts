@@ -1,24 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { UserModule } from '@modules/user/module';
-
-import { AppComponent } from './app.component';
-import { StoreModule } from './store/module';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from 'angular-redux-dynamic-modules';
 
+import { AppComponent } from './components/app/app.component';
+import { MainComponent } from './components/main/main.component';
+import { appRoutes } from './app.routes';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		MainComponent
 	],
 	imports: [
 		BrowserModule,
-		// RouterModule.forRoot(),
+		HttpClientModule,
+		RouterModule.forRoot(appRoutes),
 		StoreModule,
-		UserModule
 	],
-	providers: [],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
