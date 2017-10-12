@@ -24,7 +24,7 @@
 		"@angular/platform-browser": "^4.0.0",
 		"@angular/platform-browser-dynamic": "^4.0.0",
 		"@angular/router": "^4.0.0",
-		"angular-redux-dynamic-modules": "0.1.1",
+		"angular-redux-dynamic-modules": "0.2.1",
 		"core-js": "^2.4.1",
 		"redux": "^3.7.2",
 		"redux-logger": "^3.0.6",

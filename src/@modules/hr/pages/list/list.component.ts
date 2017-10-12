@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-// import * as loan from '@modules/loan';
+import { Dispatcher } from 'angular-redux-dynamic-modules';
 import * as user from '@modules/user';
 import * as hr from '@modules/hr';
 import { Observable } from 'rxjs/Rx';
-import { Dispatcher } from 'app/components/dispatcher';
 
 
 @Component({

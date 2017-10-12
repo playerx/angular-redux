@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+
+		// console.log(require.ensure);
 		// this.items$ = this.hrStore.select(x => x.list23232);
 
 		// this.userStore.dispatch({

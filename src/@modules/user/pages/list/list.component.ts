@@ -4,7 +4,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import * as user from '@modules/user';
 import * as hr from '@modules/hr';
 import { Observable } from 'rxjs/Rx';
-import { Dispatcher } from 'app/components/dispatcher';
+import { Dispatcher } from 'angular-redux-dynamic-modules';
 import { AppState } from 'app/app.state';
 
 

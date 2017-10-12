@@ -6,7 +6,6 @@ import { StoreModule } from 'angular-redux-dynamic-modules';
 
 import { AppComponent } from './components/app/app.component';
 import { MainComponent } from './components/main/main.component';
-import { Dispatcher } from './components/dispatcher';
 import { appRoutes } from './app.routes';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { appRoutes } from './app.routes';
 		RouterModule.forRoot(appRoutes),
 		StoreModule,
 	],
-	providers: [Dispatcher],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
